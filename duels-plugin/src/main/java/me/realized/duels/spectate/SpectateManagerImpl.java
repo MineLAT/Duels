@@ -177,7 +177,12 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         if (CompatUtil.hasSetCollidable()) {
             player.setCollidable(false);
         } else {
-            player.spigot().setCollidesWithEntities(false);
+            try {
+                final Object spigot = Player.class.getDeclaredMethod("spigot").invoke(player);
+                spigot.getClass().getDeclaredMethod("setCollidesWithEntities", boolean.class).invoke(spigot, false);
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
         }
 
         if (config.isSpecAddInvisibilityEffect()) {
@@ -209,7 +214,12 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         if (CompatUtil.hasSetCollidable()) {
             player.setCollidable(true);
         } else {
-            player.spigot().setCollidesWithEntities(true);
+            try {
+                final Object spigot = Player.class.getDeclaredMethod("spigot").invoke(player);
+                spigot.getClass().getDeclaredMethod("setCollidesWithEntities", boolean.class).invoke(spigot, true);
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
         }
 
         final PlayerInfo info = playerManager.remove(player);

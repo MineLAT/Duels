@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemFlag;
 
 public class EffectsButton extends BaseButton {
 
+    private static final ItemFlag HIDE_ADDITIONAL_TOOLTIP = ItemFlag.values()[5];
+
     public EffectsButton(final DuelsPlugin plugin, final Player player) {
         super(plugin, ItemBuilder
             .of(Items.WATER_BREATHING_POTION.clone())
@@ -24,7 +26,7 @@ public class EffectsButton extends BaseButton {
             .build());
         editMeta(meta -> {
             if (CompatUtil.hasItemFlag()) {
-                meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+                meta.addItemFlags(HIDE_ADDITIONAL_TOOLTIP);
             }
         });
     }

@@ -9,6 +9,8 @@ import org.bukkit.inventory.ItemFlag;
 
 public class PotionCounterButton extends BaseButton {
 
+    private static final ItemFlag HIDE_ADDITIONAL_TOOLTIP = ItemFlag.values()[5];
+
     public PotionCounterButton(final DuelsPlugin plugin, final int count) {
         super(plugin, ItemBuilder
             .of(Items.HEAL_SPLASH_POTION.clone())
@@ -17,7 +19,7 @@ public class PotionCounterButton extends BaseButton {
         );
         editMeta(meta -> {
             if (CompatUtil.hasItemFlag()) {
-                meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+                meta.addItemFlags(HIDE_ADDITIONAL_TOOLTIP);
             }
         });
     }

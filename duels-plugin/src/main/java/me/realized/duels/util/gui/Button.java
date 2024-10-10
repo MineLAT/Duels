@@ -10,8 +10,8 @@ import me.realized.duels.util.compat.CompatUtil;
 import me.realized.duels.util.compat.Items;
 import me.realized.duels.util.compat.Skulls;
 import me.realized.duels.util.inventory.ItemBuilder;
+import net.sacredlabyrinth.phaed.simpleclans.xseries.XEnchantment;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -66,13 +66,13 @@ public class Button<P extends JavaPlugin> {
 
         editMeta(meta -> {
             if (glow) {
-                meta.addEnchant(Enchantment.DURABILITY, 1, false);
+                meta.addEnchant(XEnchantment.DURABILITY.parseEnchantment(), 1, false);
 
                 if (CompatUtil.hasItemFlag()) {
                     meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 }
             } else {
-                meta.removeEnchant(Enchantment.DURABILITY);
+                meta.removeEnchant(XEnchantment.DURABILITY.parseEnchantment());
 
                 if (CompatUtil.hasItemFlag()) {
                     meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);

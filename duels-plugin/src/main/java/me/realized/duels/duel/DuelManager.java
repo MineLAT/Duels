@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
+import com.cryptomorin.xseries.XEntityType;
 import me.realized.duels.DuelsPlugin;
 import me.realized.duels.api.event.match.MatchEndEvent.Reason;
 import me.realized.duels.api.event.match.MatchStartEvent;
@@ -54,7 +56,6 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -568,7 +569,7 @@ public class DuelManager implements Loadable {
                 inventoryManager.create(winner, false);
 
                 if (config.isSpawnFirework()) {
-                    final Firework firework = (Firework) winner.getWorld().spawnEntity(winner.getEyeLocation(), EntityType.FIREWORK);
+                    final Firework firework = (Firework) winner.getWorld().spawnEntity(winner.getEyeLocation(), XEntityType.FIREWORK_ROCKET.get());
                     final FireworkMeta meta = firework.getFireworkMeta();
                     meta.setPower(0);
                     meta.addEffect(FireworkEffect.builder().withColor(Color.RED).with(FireworkEffect.Type.BALL_LARGE).withTrail().build());

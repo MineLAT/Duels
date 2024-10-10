@@ -87,7 +87,12 @@ public final class ItemBuilder {
     public ItemBuilder unbreakable() {
         return editMeta(meta -> {
             if (CompatUtil.isPre1_12()) {
-                meta.spigot().setUnbreakable(true);
+                try {
+                    final Object spigot = ItemMeta.class.getDeclaredMethod("spigot").invoke(meta);
+                    spigot.getClass().getDeclaredMethod("setUnbreakable", boolean.class).invoke(spigot, true);
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
             } else {
                 meta.setUnbreakable(true);
             }

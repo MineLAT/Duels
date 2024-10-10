@@ -17,9 +17,9 @@ dependencies {
     compileOnly 'org.jetbrains:annotations-java5:22.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    implementation 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
+    implementation 'org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT'
     implementation 'com.mojang:authlib:1.5.21'
-    implementation 'me.clip:placeholderapi:2.11.1'
+    implementation 'me.clip:placeholderapi:2.11.6'
     implementation 'com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT'
     implementation ('net.essentialsx:EssentialsX:2.19.2') {
         transitive = false
@@ -37,12 +37,14 @@ dependencies {
     implementation name: 'BountyHunters-2.2.6'
     implementation name: 'SimpleClans-2.14.4.1'
     implementation name: 'LeaderHeadsAPI'
+    implementation 'commons-lang:commons-lang:2.6'
 
     implementation project(':duels-api')
     implementation project(':duels-worldguard')
     implementation project(':duels-worldguard-v6')
     implementation project(':duels-worldguard-v7')
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    implementation 'com.github.cryptomorin:XSeries:11.3.0'
 }
 
 shadowJar {
@@ -57,10 +59,12 @@ shadowJar {
         include(project(':duels-worldguard-v6'))
         include(project(':duels-worldguard-v7'))
         include(dependency('com.fasterxml.jackson.core:.*'))
+        include(dependency('com.github.cryptomorin:XSeries:.*'))
     }
 
     final String group = project.group.toString() + "." + parent.name.toLowerCase() + ".shaded."
-    relocate 'com.fasterxml.jackson.core', group + 'jackson-core'
+    relocate 'com.fasterxml.jackson', group + 'jackson'
+    relocate 'com.cryptomorin.xseries', group + 'xseries'
 }
 
 // To build Duels plugin jar, run './gradlew clean build'.
